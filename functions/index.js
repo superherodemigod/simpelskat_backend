@@ -3,19 +3,19 @@ const functions = require("firebase-functions");
 const express = require("express");
 const PORT = 3000;
 const app = express();
-
+const cors = require('cors');
+const distance = require("google-distance-matrix");
 /* JSON body parse*/
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+app.use(cors())
 app.get("/hello", (req, res, next) => {
   console.info("/hello call success ");
   res.send("Welcome to Firebase Cloud Functions");
 });
 app.get("/distance", (req, res) => {
-  const distance = require("google-distance-matrix");
-
+  console.info("request----", req.query,"response---")
   const origins = [req.query.origins];
   const destinations = [req.query.destinations];
 
